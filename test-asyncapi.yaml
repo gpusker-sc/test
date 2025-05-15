@@ -1,0 +1,39 @@
+asyncapi: '2.6.0'
+info:
+  title: Example User Events API
+  version: 1.0.0
+  description: Example AsyncAPI spec for user events via AWS SQS.
+servers:
+  production:
+    url: https://sqs.us-east-1.amazonaws.com/123456789012/example-queue
+    protocol: sqs
+channels:
+  user-created:
+    description: Channel for 'user created' events.
+    subscribe:
+      summary: Receive notification when a user is created.
+      message:
+        name: UserCreated
+        payload:
+          type: object
+          properties:
+            id:
+              type: string
+              description: Unique identifier for the user.
+            name:
+              type: string
+            email:
+              type: string
+components:
+  messages:
+    UserCreated:
+      payload:
+        type: object
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          email:
+            type: string
+
